@@ -15,7 +15,7 @@ ex.num+=6*count
 2) from collections import defaultdict
 3) 문자의 개수 셀 때 유용함!
 
-# 조합 구하기 
+### 조합 구하기 
 - 들어오는 값을 2개 조합으로 만들어라 
 - 각 변수는 값 하나하나를 가지고 옴.. for 구문을 2번 쓸 필요 X
 from itertools import combinations
