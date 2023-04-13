@@ -18,7 +18,7 @@ ex.num+=6*count
 ### 조합 구하기 
 - 들어오는 값을 2개 조합으로 만들어라 
 - 각 변수는 값 하나하나를 가지고 옴.. for 구문을 2번 쓸 필요 X
-from itertools import combinations
+'''from itertools import combinations
 for a, b in combinations(x, 2):
   a,b,c=f1
-  c,d,f=f2
+  c,d,f=f2'''
