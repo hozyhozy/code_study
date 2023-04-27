@@ -14,7 +14,7 @@ dic = {}
 for part in participant:
     dic[hash(part)] = part
     temp += int(hash(part))
-for com in completion:  #dictionary value값을 빼기 헤줄 수 있다..!
+for com in completion:  
     temp -= hash(com)
 answer = dic[temp]
 answer
