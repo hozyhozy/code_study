@@ -1,0 +1,48 @@
+# Level 1_ 신고결과받기 (2022 KAKAO BLIND RECRUITMENT)
+
+문제 설명
+신입사원 무지는 게시판 불량 이용자를 신고하고 처리 결과를 메일로 발송하는 시스템을 개발하려 합니다. 무지가 개발하려는 시스템은 다음과 같습니다.
+
+각 유저는 한 번에 한 명의 유저를 신고할 수 있습니다.
+신고 횟수에 제한은 없습니다. 서로 다른 유저를 계속해서 신고할 수 있습니다.
+한 유저를 여러 번 신고할 수도 있지만, 동일한 유저에 대한 신고 횟수는 1회로 처리됩니다.
+k번 이상 신고된 유저는 게시판 이용이 정지되며, 해당 유저를 신고한 모든 유저에게 정지 사실을 메일로 발송합니다.
+유저가 신고한 모든 내용을 취합하여 마지막에 한꺼번에 게시판 이용 정지를 시키면서 정지 메일을 발송합니다.
+다음은 전체 유저 목록이 ["muzi", "frodo", "apeach", "neo"]이고, k = 2(즉, 2번 이상 신고당하면 이용 정지)인 경우의 예시입니다.
+
+
+입출력 예 #1
+
+문제의 예시와 같습니다.
+
+입출력 예 #2
+
+"ryan"이 "con"을 4번 신고했으나, 주어진 조건에 따라 한 유저가 같은 유저를 여러 번 신고한 경우는 신고 횟수 1회로 처리합니다. 따라서 "con"은 1회 신고당했습니다. 3번 이상 신고당한 이용자는 없으며, "con"과 "ryan"은 결과 메일을 받지 않습니다. 따라서 [0, 0]을 return 합니다.
+
+id_list	report	k	result
+["muzi", "frodo", "apeach", "neo"]	["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]	2	[2,1,1,0]
+["con", "ryan"]	["ryan con", "ryan con", "ryan con", "ryan con"]	3	[0,0]
+
+
+답>>
+def solution(id_list, report, k):
+    answer=[0]*len(id_list)
+    reported_dict= {id:[] for id in id_list}
+
+    for i in set(report):
+        r_s=i.split(' ')
+        reported_dict[r_s[1]].append(r_s[0]) # 신고를 한 아이들이 value로
+    
+    for key,v in reported_dict.items():
+        if len(v) >= k:
+            for name in v:
+                answer[id_list.index(name)] +=1
+
+    return answer
+
+
+포인트:
+1. dictionary를 만들떄 id: []로 둔다면 append 가능
+2. [] 안에 값이 1개 있다고 []를 제거안해주면 안됨!! 꼭 리스트 제거해주어야 if x in b 라는 문법이 돌아감
+3. i.split() 는 default값이 ' '이므로 굳이 (' ') 안해줘도 됨
+4. List.index를 사용한다면 각 index 값을 업데이트 할 수 있음 / answer의 값이 숫자 업뎃이라면! [0] * 답갯수 이렇게 만들어주기!
