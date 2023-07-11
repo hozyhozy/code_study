@@ -1,0 +1,55 @@
+# 옹알이 1
+
+
+> 머쓱이는 태어난 지 6개월 된 조카를 돌보고 있습니다. 
+
+
+> 조카는 아직 "aya" , "ye" , "woo" , "ma" 네 가지 발음을 최대 한 번씩 사용해 조합한 발음밖에 하지 못합니다. 
+
+
+> 문자열 배열 babbling이 매개변수로 주어질 때, 머쓱이의 조카가 발음할 수 있는 단어의 개수를 return하도록 solution 함수를 완성해주세요.
+
+> |babbling|result|
+> |------|---|---|
+> |["aya", "yee", "u", "maa", "wyeoo"]|1|
+> |["ayaye", "uuuma", "ye", "yemawoo", "ayaa"]|3|
+
+#
+### 답지1 _ Permutations 로 완전 탐색법 이용하기
+
+
+```python 
+
+from itertools import permutations
+def solution(babbling):
+    answer = 0
+    case=[]
+    for i in range(1,5):
+        for j in permutations(["aya", "ye", "woo", "ma"], i):
+            case.append(''.join(j))
+
+    for bab in babbling:
+        if bab in case:
+            answer+=1
+
+    return answer
+
+```
+
+
+### 답지2_ 정규표현식 사용!
+
+```python
+
+import re
+
+def solution(babbling):
+  regex = re.compile('^(aya|ye|woo|ma)+$') # ^: 문자의 시작, $: 문자의 끝, + 앞의 내용을 1번이상 반복
+    cnt=0
+    for e in babbling:
+        if regex.match(e):
+            cnt+=1
+    return cnt
+# compile은 문자열 패턴을 만들때 사용 
+# 즉, aya, ye, woo,ma 중에서 하나 이상 반복되면 cnt에 1을 더하라
+```
